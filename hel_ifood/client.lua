@@ -103,7 +103,7 @@ RegisterCommand('lanche',function(source,args,rawCommand)
             --TriggerServerEvent("trydeleteobj",ObjToNet("hei_prop_heist_box"))
         end)
     end
-end
+end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 --[ ENTREGAS ]---------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -159,7 +159,12 @@ Citizen.CreateThread(function()
         end
         if distance2 <= 3 then
             DrawText3Ds(CoordenadaX1,CoordenadaY1,CoordenadaZ1,"/lanche")
-        end
+		end
+	end
+end
+
+Citizen.CreateThread(function()
+	while true do
 		Citizen.Wait(1000)
 		if processo then
 			if segundos > 0 then
