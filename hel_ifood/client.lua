@@ -148,20 +148,29 @@ AddEventHandler("quantidade-lanche",function(status)
     quantidade = status
 end)
 
+local cds = {
+	{x=151.9,y=-1467.61,z=28.6},
+	{x=143.92,y=-1462.73,z=29.36},
+	}
+
 Citizen.CreateThread(function()
-    while true do
-        local ped = PlayerPedId()
-        local x,y,z = table.unpack(GetEntityCoords(ped))
-        local distance1 = GetDistanceBetweenCoords(CoordenadaX,CoordenadaY,CoordenadaZ,x,y,z,true)
-        local distance2 = GetDistanceBetweenCoords(CoordenadaX1,CoordenadaY1,CoordenadaZ1,x,y,z,true)
-        if distance1 <= 5 then
-            DrawText3Ds(CoordenadaX,CoordenadaY,CoordenadaZ,"/ifood iniciar")
-        end
-        if distance2 <= 3 then
-            DrawText3Ds(CoordenadaX1,CoordenadaY1,CoordenadaZ1,"/lanche")
+	while true do
+		local idle = 1000
+		local ped = PlayerPedId()
+		local x,y,z = table.unpack(GetEntityCoords(ped))
+		for k, v in pairs(cds) do
+		  local distance = GetDistanceBetweenCoords(v.x,v.y,v.z,x,y,z,true)  
+			if distance <= 5 then
+				idle = 5
+				DrawText3Ds(CoordenadaX,CoordenadaY,CoordenadaZ,"/ifood iniciar")
+			end	
+			if distance <= 3 then
+				DrawText3Ds(CoordenadaX1,CoordenadaY1,CoordenadaZ1,"/lanche")
+			end
 		end
+	   Wait(idle)
 	end
-end
+end)
 
 Citizen.CreateThread(function()
 	while true do
